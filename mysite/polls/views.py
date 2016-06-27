@@ -7,7 +7,8 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
 from polls.forms import UserForm, UserProfileForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 class IndexView(generic.ListView):
 	template_name = 'polls/index.html'
@@ -52,6 +53,7 @@ def detail(request, question_id):
 	return render(request, 'polls/detail.html', {'question': question})
 
 
+@login_required
 def vote(request, question_id):
 
 	p = get_object_or_404(Question, pk=question_id)
@@ -125,7 +127,16 @@ def user_login(request):
 
 
 
+@login_required
+def restricted(request):
+	return HttpResponse("Since you are logged in, you can see this text!")
 
 
-		
+@login_required
+def user_logout(request):
+	logout(request)
+	return HttpResponseRedirect('/polls/')	
+
+
+
 # Create your views here.
