@@ -41,9 +41,9 @@ def results(request, question_id):
 
 
 
-def index(request):
+def questions(request):
 	latest_question_list = Question.objects.order_by('-pub_date')[:5]
-	template = loader.get_template('polls/index.html')
+	template = loader.get_template('polls/questions.html')
 	context = RequestContext(request, {'latest_question_list': latest_question_list,})
 	#output = ', '.join([p.question_text for p in latest_question_list])
 	return HttpResponse(template.render(context))
@@ -51,6 +51,14 @@ def index(request):
 def detail(request, question_id):
 	question = get_object_or_404(Question, pk=question_id)
 	return render(request, 'polls/detail.html', {'question': question})
+
+
+def selectquestion(request):
+	latest_question_list = Question.objects.order_by('-pub_date')[:5]
+	template = loader.get_template('polls/selectquestion.html')
+	context = RequestContext(request, {'latest_question_list': latest_question_list,})
+	#output = ', '.join([p.question_text for p in latest_question_list])
+	return HttpResponse(template.render(context))
 
 
 @login_required
