@@ -1,18 +1,30 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Polls</title>
-	</head>
-
-	<body>
-		<h1> Login to Polls</h1>
-		<form id="login_form" method="post" action="/polls/login/">
+<html lang="en">
+{% load staticfiles %}
+<head>
+	<title>Polls</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<style>.container{ padding:10px; margin:180px auto; background-color:grey; width:30%; text-align:center;}
+		html, body { height: 100%; padding: 0px 0px; margin: 0px 0px; position: relative; background: url("http://www.borongaja.com/data_images/out/5/593917-blue-brick-wall.jpg") center center; background-repeat: no-repeat; background-size: cover; overflow: hidden; opacity:0.9; }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1><b>Login to Polls</b></h1>
+		<form role="form" id="login_form" method="post" action="/polls/login/">
 			{% csrf_token %}
-			Username: <input type="text" name="username" value="" size="50" /><br/>
-			Password: <input type="password" name="password" value="" size="50" /><br/>
-
-			<input type="submit" value="submit" />
+		<div class="form-group">
+			<label for="Username"><h4><b>Username: </b></h4></label><input type="text" class="form-control" name="username" value="" placeholder="Enter Username" size="50" />
+		</div>
+		<div class="form-group">
+			<label for="Password"><h4><b>Password: </b></h4></label><input type="password" class="form-control" id="pwd" name="password" value="" size="50" placeholder="Enter Password"/>
+		</div>
+			<input type="submit" class="btn btn-primary" value="submit" />
 		</form>
-
-	</body>
+	</div>
+</body>
 </html>

@@ -1,10 +1,28 @@
-<h1>{{ question.question_text }}</h1>
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+	<title>Polls</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<style>.container{ padding:10px; margin:180px auto; background-color:grey; width:30%; text-align:center;}
+		html, body { height: 100%; padding: 0px 0px; margin: 0px 0px; position: relative; background: url("http://www.borongaja.com/data_images/out/5/593917-blue-brick-wall.jpg") center center; background-repeat: no-repeat; background-size: cover; overflow: hidden; opacity:0.9; }
+	</style>
+</head>
+<body>
+<div class="container">
+	<h1><b>{{ question.question_text }}</b></h1>
 
-<ul>
-{% for choice in question.choice_set.all %}
-	<li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul>
-
-<a href="{% url 'polls:questions' %}">keep voting</a>
-
+	<ul>
+	{% for choice in question.choice_set.all %}
+		<h4><li><b>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</b></li></h4>
+	{% endfor %}
+	</ul>
+	<button type="button" class="btn btn-primary" onclick="location.href='{% url 'polls:selectquestion' %}';">Back</button>
+	<button type="button" class="btn btn-primary" onclick="location.href='{% url 'polls:questions' %}';">Keep Voting</button>
+</div>
+</body>
+</html>
