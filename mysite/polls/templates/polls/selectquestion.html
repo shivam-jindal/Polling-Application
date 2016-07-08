@@ -8,6 +8,12 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<style>
+	html, body { height: 100%; padding: 0; margin: 0; position: relative; background: url("http://www.borongaja.com/data_images/out/5/593917-blue-brick-wall.jpg") center center; background-repeat: no-repeat; background-size: cover; overflow: hidden; opacity:0.9; }
+	.jumbotron{ color: blue; text-shadow: black 0.3em 0.3em 0.3em; }
+	footer { position: absolute; bottom: 0; left: 0; right: 0; }
+	h1, nav {padding:0; margin:0; }
+	</style>
 </head>
 
 <body>
@@ -33,13 +39,21 @@
 				</ul>
 			</div>
 		</div>
-	</nav>
+	</nav><h1 style="color:black">Choose a question to see reults-</h1>
 	{% if latest_question_list %}
-	<ul>
+	<table class="table table-hover col-md-12" style="background-color:grey">
+		<thead><tr>
+			<th class="col-md-9"><b><h4> Question </h4></b></th>
+			<th class="col-md-3"><b><h4> Publised On </h4></b></th>
+		</tr></thead>
+		<tbody>
 	{% for question in latest_question_list %}
-		<Li><a href="{% url 'polls:results' question.id %}">{{ question.question_text }}</a></li>
+		<tr onclick="location.href='{% url 'polls:results' question.id %}';"><td><b> {{ question.question_text }}</b></td>
+		<td><b>{{ question.pub_date }}</b></td></tr>
+
 	{% endfor %}
-	</ul>
+		</tbody>
+	</table>
 	{% else %}
 	<p>No polls are available.</p>
 	{% endif %}
