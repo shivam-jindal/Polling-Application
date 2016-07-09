@@ -1,28 +1,45 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Polls</title>
-	</head>
-
-	<body>
-		<h1>Register with Polls</h1>
-
+<html lang="en">
+{% load staticfiles %}
+<head>
+	<title>Polls</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<style>.container{ padding:10px; margin:100px auto; background-color:grey; width:35%; text-align:center; }
+		html, body { height: 100%; padding: 0px 0px; margin: 0px 0px; position: relative; background: url("http://www.borongaja.com/data_images/out/5/593917-blue-brick-wall.jpg") center center; background-repeat: no-repeat; background-size: cover; overflow: hidden; opacity:0.9; }
+	</style>
+</head>
+<body>
+	<div class="container">
+		
 		{% if registered %}
-		Polls says: <strong>thank you for registering!</strong>
-		<a href="/polls/">Return to the homepage.</a><br/>
+		<h4>Polls says:</h4> <h2><strong>Thank you for registering!</strong> <br/> </h2>
+		<h2 style="color:green">Please <button type="button" class="btn btn-primary" onclick="location.href='/polls/login/'">login</button> to continue..<br/></h2>
 		{% else %}
-		Polls says: <strong>register here!</strong><br/>
-
-		<form id="user_form" method="post" action="/polls/register/" enctype="multipart/form-data">
+		<h1><b>Register with Polls</b></h1>
+		<form role="form" id="user_form" method="post" action="/polls/register/" enctype="multipart/form-data">
 
 			{% csrf_token %}
+			{% for field in user_form %}
+    			<div class="fieldWrapper">
+                	{{ field.label_tag }} <br/>{{ field }} <span style="color:red">{{ field.errors }}</span>
+			</div>
+			{% endfor %}
 
-			{{ user_form.as_p }}
-			{{ profile_form.as_p }}
-
-			<input type="submit" name="submit" value="Register" />
+			{% for field in profile_form %}
+    			<div class="fieldWrapper">
+                	{{ field.label_tag }}(optional) <br/>{{ field }} <span style="color:red">{{ field.errors }}</span>
+			</div>
+			{% endfor %}
+			<br/>
+			<button type="button" class="btn btn-primary" onclick="location.href='/polls/'">Back</button>
+			<input type="submit" class="btn btn-primary" name="submit" value="Register" />
 		</form>
 		{% endif %}
 
-	</body>
+	</div>
+</body>
 </html>

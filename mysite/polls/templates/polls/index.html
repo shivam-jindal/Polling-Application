@@ -47,8 +47,8 @@
 	</nav>
 	<div class="jumbotron">
 	{% if user.is_authenticated %}
-	<h2 style="text-align:center">Hello {{ user.first_name }} {{ user.last_name }}! </h2>
-	{% else %}
+	<h2 style="text-align:center">Hello {{ user.first_name }} {{ user.last_name }}!</h2>
+	{% else %} 
 	<h2 style="text-align:center">Hello World!</h2>
 	{% endif %}
 	<h1 style="text-align:center"> Welcome to the Polling App! </h1>
