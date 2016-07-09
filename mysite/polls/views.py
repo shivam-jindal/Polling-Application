@@ -87,16 +87,21 @@ def register(request):
 	if request.method == 'POST':
 		user_form = UserForm(data=request.POST)
 		profile_form = UserProfileForm(data=request.POST)
-		
+		pass1 = request.POST.get('password')
+		pass2 = request.POST.get('p2')
 		if user_form.is_valid() and profile_form.is_valid():
-			user = user_form.save()
-			user.set_password(user.password)
-			user.save()
-
-			profile = profile_form.save(commit=False)
-			profile.user = user
-			profile.save()
-			registered = True
+			if (pass1 != pass2 ):
+				user_form.non_field_errors = 'Passwords did not match.'
+				print user_form.non_field_errors
+			else:
+				user = user_form.save()
+				user.set_password(user.password)
+				user.save()
+	
+				profile = profile_form.save(commit=False)
+				profile.user = user
+				profile.save()
+				registered = True
 		else:
 			print user_form.errors, profile_form.errors
 

@@ -14,7 +14,6 @@
 </head>
 <body>
 	<div class="container">
-		
 		{% if registered %}
 		<h4>Polls says:</h4> <h2><strong>Thank you for registering!</strong> <br/> </h2>
 		<h2 style="color:green">Please <button type="button" class="btn btn-primary" onclick="location.href='/polls/login/'">login</button> to continue..<br/></h2>
@@ -28,7 +27,7 @@
                 	{{ field.label_tag }} <br/>{{ field }} <span style="color:red">{{ field.errors }}</span>
 			</div>
 			{% endfor %}
-
+			<label for="p2">Confirm Password: </label><br/><input type="password" id="p2" name="p2" value=""/> <span style="color:red">{{ user_form.non_field_errors }}</span>
 			{% for field in profile_form %}
     			<div class="fieldWrapper">
                 	{{ field.label_tag }}(optional) <br/>{{ field }} <span style="color:red">{{ field.errors }}</span>
