@@ -9,7 +9,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<style>
-	html, body { height: 100%; padding: 0; margin: 0; position: relative; background: url("http://www.borongaja.com/data_images/out/5/593917-blue-brick-wall.jpg") center center; background-repeat: no-repeat; background-size: cover; overflow: hidden; opacity:0.9; }
+	html, body { height: 100%; padding: 0; margin: 0; position: relative; background: url("http://www.loonietimes.com/wp-content/uploads/2012/09/Slider_bg_blue.jpg") center center; background-repeat: no-repeat; background-size: cover; overflow: hidden; opacity:0.8; }
 	h1, nav {padding:0; margin:0; }
 	</style>
 </head>
@@ -23,7 +23,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>                        
 				</button>
-				<a class="navbar-brand" href="/polls/"><b><i>My Polls</i></b></a>
+				<a class="navbar-brand" href="/polls/"><b><i>Polls </i></b></a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
@@ -32,7 +32,18 @@
 					<li class="active"><a href="/polls/selectquestion/">See Resuls</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a><span class="glyphicon glyphicon-user"></span> {{ user.username }} </a></li>
+					<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span><b> {{ user.username }} </b><span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a><b> First Name : {{ user.first_name }}</b></a></li>
+							<li><a><b> Last Name  : {{ user.last_name }}</b></a></li>
+							<li><a><b> Username   : {{ user.username }}</b></a></li>
+							<li><a><b> Email Id   : {{ user.email }}</b></a></li>
+							<li class="divider"></li>
+							<li><a href="/polls/editprofile/" class="btn"><b>Edit Profile</b></a></li>
+							<li><a href="/polls/changepassword/" class="btn"><b>Change Password</b></a></li>
+						</ul>
+					</li>
 					<li><a href="/polls/logout/"><span class="glyphicon glyphicon-log-out"></span> logout </a></li>
 				</ul>
 			</div>

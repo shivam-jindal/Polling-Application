@@ -17,8 +17,7 @@ class IndexView(generic.ListView):
 
 	def get_queryset(self):
 		"""Return the last five published questions."""
-		return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
-
+		return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:20]
 
 
 class DetailView(generic.DetailView):
@@ -36,26 +35,29 @@ def index(request):
 	return HttpResponse("Hello world. you are at the polls index.")
 
 
+@login_required
 def results(request, question_id):
 	question = get_object_or_404(Question, pk=question_id)
 	return render(request, 'polls/results.html', {'question': question})
 
 
-
+@login_required
 def questions(request):
-	latest_question_list = Question.objects.order_by('-pub_date')[:5]
+	latest_question_list = Question.objects.order_by('-pub_date')[:20]
 	template = loader.get_template('polls/questions.html')
 	context = RequestContext(request, {'latest_question_list': latest_question_list,})
 	#output = ', '.join([p.question_text for p in latest_question_list])
 	return HttpResponse(template.render(context))
 
+
+@login_required
 def detail(request, question_id):
 	question = get_object_or_404(Question, pk=question_id)
 	return render(request, 'polls/detail.html', {'question': question})
 
-
+@login_required
 def selectquestion(request):
-	latest_question_list = Question.objects.order_by('-pub_date')[:5]
+	latest_question_list = Question.objects.order_by('-pub_date')[:20]
 	template = loader.get_template('polls/selectquestion.html')
 	context = RequestContext(request, {'latest_question_list': latest_question_list,})
 	#output = ', '.join([p.question_text for p in latest_question_list])
@@ -114,7 +116,7 @@ def register(request):
 		'polls/register.html',
 		{'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
-
+@login_required
 def editprofile(request):
 	edited = False
 	errormsg = ""
@@ -143,7 +145,7 @@ def editprofile(request):
 		{'edited': edited, 'errormsg':errormsg})
 
 
-
+@login_required
 def changepassword(request):
 	errormsg = ""
 	changed = False
@@ -206,11 +208,6 @@ def user_login(request):
 		'polls/login.html',
 		{'errormsg':errormsg})
 
-
-
-@login_required
-def restricted(request):
-	return HttpResponse("Since you are logged in, you can see this text!")
 
 
 @login_required

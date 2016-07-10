@@ -9,7 +9,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<style>
-	html, body { height: 100%; padding: 0px 0px; margin: 0px 0px; position: relative; background: url("http://www.borongaja.com/data_images/out/5/593917-blue-brick-wall.jpg") center center; background-repeat: no-repeat; background-size: cover; overflow: hidden; opacity:0.8; }
+	html, body { height: 100%; padding: 0px 0px; margin: 0px 0px; position: relative; background: url("http://www.zastavki.com/pictures/originals/2012/Backgrounds_Blue_background_with_circles_035663_.jpg") center center; background-repeat: no-repeat; background-size: cover; overflow: hidden; opacity:0.9; }
 	.jumbotron{ color: #222222; text-shadow: black 0.3em 0.3em 0.3em; }
 	footer { position: absolute; bottom: 0; left: 0; right: 0; }
 	</style>
@@ -25,7 +25,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>                        
 				</button>
-				<a class="navbar-brand" href="/polls/"><b><i>My Polls</i></b></a>
+				<a class="navbar-brand" href="/polls/"><b><i>Polls </i></b></a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
@@ -35,7 +35,18 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					{% if user.is_authenticated %}
-					<li><a><span class="glyphicon glyphicon-user"></span><b> {{ user.username }} </b></a></li>
+					<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span><b> {{ user.username }} </b><span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a><b> First Name : {{ user.first_name }}</b></a></li>
+							<li><a><b> Last Name  : {{ user.last_name }}</b></a></li>
+							<li><a><b> Username   : {{ user.username }}</b></a></li>
+							<li><a><b> Email Id   : {{ user.email }}</b></a></li>
+							<li class="divider"></li>
+							<li><a href="/polls/editprofile/" class="btn"><b>Edit Profile</b></a></li>
+							<li><a href="/polls/changepassword/" class="btn"><b>Change Password</b></a></li>
+						</ul>
+					</li>
 					<li><a href="/polls/logout/"><span class="glyphicon glyphicon-log-out"></span><b> logout </b></a></li>
 					{% else %}	
 					<li><a href="/polls/register/"><span class="glyphicon glyphicon-user"></span><b> Sign Up</b></a></li>
@@ -57,10 +68,10 @@
 	<div class="alert alert-info" style="text-align:center; color:#222222;">
 	<h2>Here you can..</h2>
 	<dl>
-	<dt>Vote</dt>
-	<dd> -a lot of trending questions are waiting for your opinion</dd>
-	<dt>See Results</dt>
-	<dd> -see what's the current status of votes on each question</dd>
+		<dt>Vote</dt>
+		<dd> -a lot of trending questions are waiting for your opinion</dd>
+		<dt>See Results</dt>
+		<dd> -see what's the current status of votes on each question</dd>
 	</dl>
 	</div>
 	</div>
