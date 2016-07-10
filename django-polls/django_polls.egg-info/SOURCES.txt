@@ -15,7 +15,12 @@ polls/urls.py
 polls/views.py
 polls/static/polls/style.css
 polls/static/polls/images/background.gif
+polls/templates/polls/changepassword.html
 polls/templates/polls/detail.html
+polls/templates/polls/editprofile.html
 polls/templates/polls/index.html
+polls/templates/polls/login.html
+polls/templates/polls/questions.html
 polls/templates/polls/register.html
 polls/templates/polls/results.html
+polls/templates/polls/selectquestion.html
