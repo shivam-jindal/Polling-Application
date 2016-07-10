@@ -144,6 +144,42 @@ def editprofile(request):
 
 
 
+def changepassword(request):
+	errormsg = ""
+	changed = False
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		p1 = request.POST.get('p1')
+		p2 = request.POST.get('p2')
+		u = User.objects.get(username = username)
+		user = authenticate(username=username, password=password)
+		if user:
+			if (p1 != p2):
+				errormsg = "new passwords did not match.."
+				print errormsg
+			else:
+				if (p1 == ""):
+					errormsg = "new password field can't be empty"
+					print errormsg
+				else:
+					u.set_password(p1)
+					u.save()
+					changed = True
+		else:
+			errormsg = "Wrong Password. Please Try Again."
+			print errormsg			
+	else:			
+		return render(request, 'polls/changepassword.html', {})
+
+	return render(request,
+		'polls/changepassword.html',
+		{'changed': changed, 'errormsg':errormsg})
+
+
+
+
+
 	
 
 def user_login(request):
