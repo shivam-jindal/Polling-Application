@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+	<title>Polls</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<style>.container{ padding:10px; margin:100px auto; background-color:grey; width:35%; text-align:center; }
+		html, body { height: 100%; padding: 0px 0px; margin: 0px 0px; position: relative; background: url("http://www.borongaja.com/data_images/out/5/593917-blue-brick-wall.jpg") center center; background-repeat: no-repeat; background-size: cover; overflow: hidden; opacity:0.9; }
+	</style>
+</head>
+<body>
+	<div class="container">
+
+		{% if edited %}
+		<h4>Polls says:</h4> <h2><strong>Profile Updated Successfully!</strong> <br/> </h2>
+		<h2 style="color:green">click <button type="button" class="btn btn-primary" onclick="location.href='/polls/'">home</button> to continue..<br/></h2>
+		{% else %}
+		<h1><b>Edit Profile</b></h1>
+		<form role="form" name="update_form" id="update_form" method="post" action="/polls/editprofile/" enctype="multipart/form-data">
+			{% csrf_token %}
+			<label for="username">Username: </label><br/><input type="text" id="disabledInput" id="username"  class="form-control" name="username" value="{{ user.username }}" readonly/> <hr/>
+			<label for="first_name">First Name: </label><br/><input type="text" id="first_name" class="form-control" name="first_name" value="{{ user.first_name }}"/>
+			<label for="last_name">Last Name: </label><br/><input type="text" id="last_name" class="form-control" name="last_name" value="{{ user.last_name }}" />
+			<label for="email">Email: </label><br/><input type="text" id="email" class="form-control" name="email" value="{{ user.email }}"/><hr/>
+			<label for="password">Enter password to continue: </label><br/><input type="password" id="password" class="form-control" name="password" value=""/>
+
+			
+			<span style="color:red"><h4>{{ errormsg }}</h4></span>
+			<br/>
+			<button type="button" class="btn btn-primary" onclick="location.href='/polls/'">Back</button>
+			<input type="submit" class="btn btn-primary" name="submit" value="editprofile" />
+		</form>
+		{% endif %}
+
+	</div>
+</body>
+</html>

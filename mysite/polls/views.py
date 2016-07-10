@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from polls.models import Question, Choice
+from polls.models import Question, Choice, UserProfile
 from django.template import RequestContext, loader
 from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib.auth.models import User
 from polls.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -114,7 +115,39 @@ def register(request):
 		{'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 
+def editprofile(request):
+	edited = False
+	errormsg = ""
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		fn = request.POST.get('first_name')
+		ln = request.POST.get('last_name')
+		emailid = request.POST.get('email')
+		u = User.objects.get(username = username)
+		user = authenticate(username=username, password=password)
+		if user:		
+			u.first_name = fn
+			u.last_name = ln
+			u.email = emailid	
+			u.save()
+			edited = True
+		else:
+			errormsg = "Wrong Password. Please Try Again."
+			print errormsg			
+	else:
+		return render(request, 'polls/editprofile.html', {})
+
+	return render(request,
+		'polls/editprofile.html',
+		{'edited': edited, 'errormsg':errormsg})
+
+
+
+	
+
 def user_login(request):
+	errormsg = ""
 	if request.method == 'POST':
 		username = request.POST.get('username')
 		password = request.POST.get('password')
@@ -128,11 +161,14 @@ def user_login(request):
 				return HttpResponse("your polls account is disabled.")
 
 		else:
-			print "Invalid login details:{0}, {1}".format(username, password)
-			return HttpResponse("Invalid login details.")
-
+			errormsg = "Inavalid Login Details.."
+			print errormsg
 	else:
 		return render(request, 'polls/login.html', {})
+
+	return render(request,
+		'polls/login.html',
+		{'errormsg':errormsg})
 
 
 

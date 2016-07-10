@@ -13,4 +13,5 @@ urlpatterns = patterns('',
 	url(r'^logout/$', views.user_logout, name='logout'),
 	url(r'^questions/$', views.questions, name='questions'),
 	url(r'^selectquestion/$', views.selectquestion, name='selectquestion'),
+	url(r'^editprofile/$', views.editprofile, name='editprofile'),
 )
